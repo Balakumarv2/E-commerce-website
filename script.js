@@ -30,7 +30,7 @@ async function getProducts() {
     try {
         const res = await fetch('https://dummyjson.com/products');// https://fakestoreapi.com/products
         const resp = await res.json();
-      allProducts= resp.products
+      allProducts= resp.products;
         renderProducts(allProducts);
     } catch (e) {
         list.innerHTML = "<h4 class='text-center w-100'>Error connecting to API.</h4>";
