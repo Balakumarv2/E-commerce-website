@@ -28,7 +28,7 @@ async function getProducts() {
     if (!list) return;
 
     try {
-        const res = await fetch('https://fakestoreapi.com/products');
+        const res = await fetch('**https**://fakestoreapi.com/products');
         allProducts = await res.json();
         renderProducts(allProducts);
     } catch (e) {
