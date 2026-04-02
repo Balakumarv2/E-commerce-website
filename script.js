@@ -28,8 +28,9 @@ async function getProducts() {
     if (!list) return;
 
     try {
-        const res = await fetch('https://fakestoreapi.com/products');
-        allProducts = await res.json();
+        const res = await fetch('https://dummyjson.com/products');// https://fakestoreapi.com/products
+        const resp = await res.json();
+      allProducts= resp.products
         renderProducts(allProducts);
     } catch (e) {
         list.innerHTML = "<h4 class='text-center w-100'>Error connecting to API.</h4>";
@@ -45,13 +46,13 @@ function renderProducts(products) {
     list.innerHTML = products.map(p => `
         <div class="col-12 col-md-6 col-lg-3">
             <div class="card h-100 p-3 shadow-sm bg-white">
-                <img src="${p.image}" class="card-img-top p-2" style="height:160px; object-fit:contain;">
+                <img src="${p.images}" class="card-img-top p-2" style="height:160px; object-fit:contain;">
                 <div class="card-body d-flex flex-column">
                     <h6 class="card-title text-truncate">${p.title}</h6>
                     <p class="text-primary fw-bold mb-3">$${p.price}</p>
                     <div class="mt-auto">
                         <a href="product-details.html?id=${p.id}" class="btn btn-sm btn-outline-dark w-100 mb-2">View Product</a>
-                        <button onclick="addToCart(${p.id}, '${p.title.replace(/'/g, "\\'")}', ${p.price}, '${p.image}')" class="btn btn-sm btn-primary w-100">Add to Cart</button>
+                        <button onclick="addToCart(${p.id}, '${p.title.replace(/'/g, "\\'")}', ${p.price}, '${p.images}')" class="btn btn-sm btn-primary w-100">Add to Cart</button>
                     </div>
                 </div>
             </div>
@@ -69,8 +70,8 @@ if (searchInput) {
     });
 }
 
-function addToCart(id, title, price, image) {
-    cart.push({ id, title, price, image });
+function addToCart(id, title, price, images) {
+    cart.push({ id, title, price, images });
     localStorage.setItem('myCart', JSON.stringify(cart));
     updateNavbarCount();
     alert("Added to cart!");

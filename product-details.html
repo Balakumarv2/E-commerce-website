@@ -22,19 +22,19 @@
     <script>
         async function loadProduct() {
             const id = new URLSearchParams(window.location.search).get('id');
-            const res = await fetch(`https://fakestoreapi.com/products/${id}`);
+            const res = await fetch(`https://dummyjson.com/products/${id}`);
             const p = await res.json();
 
             document.getElementById('details-content').innerHTML = `
                 <div class="col-md-5 text-center mb-4">
-                    <img src="${p.image}" class="img-fluid p-4 border rounded bg-white shadow-sm" style="max-height: 400px;">
+                    <img src="${p.images}" class="img-fluid p-4 border rounded bg-white shadow-sm" style="max-height: 400px;">
                 </div>
                 <div class="col-md-7">
                     <h5 class="text-uppercase text-muted small">${p.category}</h5>
                     <h1 class="fw-bold">${p.title}</h1>
                     <h2 class="text-primary my-3">$${p.price}</h2>
                     <p class="text-secondary mb-4 lead">${p.description}</p>
-                    <button class="btn btn-dark btn-lg px-5" onclick="addToCart(${p.id}, '${p.title.replace(/'/g, "\\'")}', ${p.price}, '${p.image}')">
+                    <button class="btn btn-dark btn-lg px-5" onclick="addToCart(${p.id}, '${p.title.replace(/'/g, "\\'")}', ${p.price}, '${p.images}')">
                         Add to Cart
                     </button>
                 </div>`;
